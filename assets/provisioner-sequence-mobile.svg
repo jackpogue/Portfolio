@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 1450" role="img" aria-labelledby="title desc">
+  <title id="title">Provisioner workflow and polling paths</title>
+  <desc id="desc">A vertical flow shows a product setting entering Step Functions, which invokes the Provisioner. Inside the highlighted Provisioner boundary, it calls an edge provider and evaluates status. Short polling loops within the Provisioner for twelve seconds; longer waits return to Step Functions, which later invokes the Provisioner again.</desc>
+  <defs>
+    <marker id="cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 10 5 0 10z" fill="#62c9d9"/></marker>
+    <marker id="amber" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 10 5 0 10z" fill="#d88b37"/></marker>
+    <marker id="green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 10 5 0 10z" fill="#72ce95"/></marker>
+  </defs>
+  <rect width="600" height="1450" fill="#0b1117"/>
+  <g font-family="Inter,Arial,sans-serif">
+    <text x="300" y="45" text-anchor="middle" fill="#fff" font-size="28" font-weight="700">Where the Provisioner sits</text>
+    <text x="300" y="75" text-anchor="middle" fill="#91a4af" font-size="17">Follow the arrows downward through the workflow.</text>
+
+    <rect x="100" y="105" width="400" height="82" rx="8" fill="#172731" stroke="#596b75" stroke-width="2"/>
+    <text x="300" y="140" text-anchor="middle" fill="#fff" font-size="22" font-weight="700">PRODUCT SETTING CHANGES</text>
+    <text x="300" y="168" text-anchor="middle" fill="#b9c7ce" font-size="16">customer enables, modifies, or removes WAF/CDN</text>
+    <path d="M300 188v54" stroke="#62c9d9" stroke-width="5" marker-end="url(#cyan)"/>
+    <text x="318" y="220" fill="#bfe8ed" font-size="15">desired-state event</text>
+
+    <rect x="100" y="250" width="400" height="92" rx="8" fill="#382719" stroke="#d88b37" stroke-width="3"/>
+    <text x="300" y="286" text-anchor="middle" fill="#fff" font-size="24" font-weight="700">AWS STEP FUNCTIONS</text>
+    <text x="300" y="316" text-anchor="middle" fill="#e4c39d" font-size="17">starts and coordinates the durable workflow</text>
+    <path d="M300 343v65" stroke="#d88b37" stroke-width="5" marker-end="url(#amber)"/>
+    <text x="319" y="379" fill="#f0d0ac" font-size="16" font-weight="700">invoke Provisioner</text>
+
+    <rect x="35" y="416" width="530" height="720" rx="14" fill="#102f39" stroke="#79e2ef" stroke-width="4"/>
+    <rect x="65" y="442" width="470" height="92" rx="8" fill="#176174" stroke="#a0edf5" stroke-width="2"/>
+    <text x="300" y="476" text-anchor="middle" fill="#fff" font-size="28" font-weight="800">THE PROVISIONER</text>
+    <text x="300" y="504" text-anchor="middle" fill="#d9f6f9" font-size="17">backend service I created and led</text>
+    <text x="300" y="526" text-anchor="middle" fill="#bfe8ed" font-size="15">allocation · modification · deallocation · status logic</text>
+
+    <path d="M300 535v50" stroke="#62c9d9" stroke-width="5" marker-end="url(#cyan)"/>
+    <rect x="105" y="592" width="390" height="86" rx="8" fill="#172731" stroke="#596b75" stroke-width="2"/>
+    <text x="300" y="625" text-anchor="middle" fill="#fff" font-size="22" font-weight="700">CALL EDGE PROVIDER</text>
+    <text x="300" y="654" text-anchor="middle" fill="#b9c7ce" font-size="17">Cloudflare / CloudFront → status: pending</text>
+    <path d="M300 679v52" stroke="#62c9d9" stroke-width="5" marker-end="url(#cyan)"/>
+
+    <polygon points="300,738 425,800 300,862 175,800" fill="#182a34" stroke="#79e2ef" stroke-width="3"/>
+    <text x="300" y="793" text-anchor="middle" fill="#fff" font-size="22" font-weight="700">Terminal state?</text>
+    <text x="300" y="820" text-anchor="middle" fill="#b9c7ce" font-size="16">ready or failed</text>
+
+    <path d="M425 800h84" stroke="#72ce95" stroke-width="5" marker-end="url(#green)"/>
+    <text x="452" y="785" fill="#9be4b7" font-size="15" font-weight="700">YES</text>
+    <rect x="432" y="842" width="106" height="84" rx="8" fill="#193626" stroke="#72ce95" stroke-width="2"/>
+    <text x="485" y="875" text-anchor="middle" fill="#fff" font-size="17" font-weight="700">UPDATE</text>
+    <text x="485" y="898" text-anchor="middle" fill="#b8e8c9" font-size="14">product state</text>
+    <text x="485" y="917" text-anchor="middle" fill="#b8e8c9" font-size="14">and complete</text>
+
+    <path d="M250 844 177 903" stroke="#62c9d9" stroke-width="5" marker-end="url(#cyan)"/>
+    <text x="182" y="863" fill="#bfe8ed" font-size="15" font-weight="700">NO · &lt; 12s</text>
+    <rect x="70" y="914" width="270" height="112" rx="8" fill="#176174" stroke="#79e2ef" stroke-width="2"/>
+    <text x="205" y="949" text-anchor="middle" fill="#fff" font-size="20" font-weight="700">SHORT WAIT + POLL AGAIN</text>
+    <text x="205" y="978" text-anchor="middle" fill="#d9f6f9" font-size="16">keep the same Provisioner</text>
+    <text x="205" y="1001" text-anchor="middle" fill="#d9f6f9" font-size="16">invocation alive</text>
+    <path d="M70 969H52V635h45" fill="none" stroke="#62c9d9" stroke-width="5" marker-end="url(#cyan)"/>
+    <text x="57" y="810" transform="rotate(-90 57 810)" text-anchor="middle" fill="#79e2ef" font-size="14" font-weight="700">LOWER-COST RAPID LOOP</text>
+
+    <path d="M350 844 397 1030" stroke="#d88b37" stroke-width="5" marker-end="url(#amber)"/>
+    <text x="367" y="889" fill="#f0d0ac" font-size="15" font-weight="700">NO · ≥ 12s</text>
+    <rect x="330" y="1042" width="205" height="72" rx="8" fill="#382719" stroke="#d88b37" stroke-width="2"/>
+    <text x="432" y="1071" text-anchor="middle" fill="#fff" font-size="18" font-weight="700">RETURN PENDING</text>
+    <text x="432" y="1096" text-anchor="middle" fill="#e4c39d" font-size="15">hand control back</text>
+
+    <path d="M432 1138v53" stroke="#d88b37" stroke-width="5" marker-end="url(#amber)"/>
+    <rect x="100" y="1198" width="400" height="98" rx="8" fill="#382719" stroke="#d88b37" stroke-width="3"/>
+    <text x="300" y="1234" text-anchor="middle" fill="#fff" font-size="22" font-weight="700">STEP FUNCTIONS WAITS</text>
+    <text x="300" y="1262" text-anchor="middle" fill="#e4c39d" font-size="16">the Provisioner is not kept alive or billing</text>
+    <text x="300" y="1285" text-anchor="middle" fill="#e4c39d" font-size="16">then Step Functions invokes it again</text>
+    <path d="M500 1247h70V463h-26" fill="none" stroke="#d88b37" stroke-width="5" marker-end="url(#amber)"/>
+    <text x="582" y="860" transform="rotate(-90 582 860)" text-anchor="middle" fill="#f0d0ac" font-size="15" font-weight="700">DURABLE WAIT → RE-INVOKE PROVISIONER</text>
+
+    <text x="300" y="1360" text-anchor="middle" fill="#fff" font-size="19" font-weight="700">Why split the loop?</text>
+    <text x="300" y="1391" text-anchor="middle" fill="#b9c7ce" font-size="16">My analysis found the 12-second point where handing control</text>
+    <text x="300" y="1415" text-anchor="middle" fill="#b9c7ce" font-size="16">back to Step Functions became the lower-cost strategy.</text>
+  </g>
+</svg>

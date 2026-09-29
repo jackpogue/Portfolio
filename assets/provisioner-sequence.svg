@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1080" role="img" aria-labelledby="title desc">
+  <title id="title">Provisioner sequence and polling flow</title>
+  <desc id="desc">Four swimlanes show the product, Step Functions, the Provisioner, and the edge provider. Step Functions invokes the Provisioner. The Provisioner makes provider calls and polls internally for up to twelve seconds. Longer pending work returns to Step Functions for a durable wait before another Provisioner invocation.</desc>
+  <defs>
+    <marker id="arrow-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 10 5 0 10z" fill="#62c9d9"/></marker>
+    <marker id="arrow-amber" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 10 5 0 10z" fill="#d88b37"/></marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 10 5 0 10z" fill="#72ce95"/></marker>
+  </defs>
+  <rect width="900" height="1080" fill="#0b1117"/>
+  <rect x="390" y="80" width="250" height="940" rx="14" fill="#123843" opacity=".78" stroke="#62c9d9" stroke-width="3"/>
+  <g font-family="Inter,Arial,sans-serif">
+    <text x="450" y="42" text-anchor="middle" fill="#fff" font-size="27" font-weight="700">Who has control—and when?</text>
+    <text x="450" y="70" text-anchor="middle" fill="#91a4af" font-size="16">Time moves downward through the provisioning lifecycle.</text>
+
+    <g>
+      <rect x="25" y="100" width="170" height="76" rx="8" fill="#172731" stroke="#596b75"/>
+      <text x="110" y="133" text-anchor="middle" fill="#fff" font-size="21" font-weight="700">PRODUCT</text>
+      <text x="110" y="157" text-anchor="middle" fill="#afbec6" font-size="14">customer’s desired state</text>
+
+      <rect x="230" y="100" width="170" height="76" rx="8" fill="#382719" stroke="#d88b37" stroke-width="2"/>
+      <text x="315" y="132" text-anchor="middle" fill="#fff" font-size="20" font-weight="700">STEP FUNCTIONS</text>
+      <text x="315" y="157" text-anchor="middle" fill="#e4c39d" font-size="14">durable orchestration</text>
+
+      <rect x="405" y="96" width="220" height="84" rx="8" fill="#176174" stroke="#79e2ef" stroke-width="3"/>
+      <text x="515" y="126" text-anchor="middle" fill="#fff" font-size="22" font-weight="800">PROVISIONER</text>
+      <text x="515" y="150" text-anchor="middle" fill="#d9f6f9" font-size="14">created and led by me</text>
+      <text x="515" y="169" text-anchor="middle" fill="#bfe8ed" font-size="13">provider operations + status logic</text>
+
+      <rect x="680" y="100" width="195" height="76" rx="8" fill="#172731" stroke="#596b75"/>
+      <text x="777" y="132" text-anchor="middle" fill="#fff" font-size="20" font-weight="700">EDGE PROVIDER</text>
+      <text x="777" y="157" text-anchor="middle" fill="#afbec6" font-size="14">Cloudflare / CloudFront</text>
+    </g>
+
+    <g stroke="#6b7a83" stroke-width="2" stroke-dasharray="7 8" opacity=".7"><path d="M110 176v820"/><path d="M315 176v820"/><path d="M515 181v815"/><path d="M777 176v820"/></g>
+
+    <text x="110" y="218" text-anchor="middle" fill="#62c9d9" font-size="14" font-weight="700">1 · CUSTOMER CHANGE</text>
+    <path d="M110 240H315" stroke="#62c9d9" stroke-width="4" marker-end="url(#arrow-cyan)"/>
+    <text x="212" y="232" text-anchor="middle" fill="#dce7eb" font-size="16">desired-state event</text>
+    <text x="110" y="276" text-anchor="middle" fill="#91a4af" font-size="13">Settings API · DynamoDB Stream · FIFO SQS</text>
+
+    <text x="315" y="318" text-anchor="middle" fill="#d88b37" font-size="14" font-weight="700">2 · START WORKFLOW</text>
+    <path d="M315 342H515" stroke="#d88b37" stroke-width="4" marker-end="url(#arrow-amber)"/>
+    <text x="415" y="333" text-anchor="middle" fill="#f0d0ac" font-size="16">invoke Provisioner</text>
+    <text x="515" y="375" text-anchor="middle" fill="#d9f6f9" font-size="15">allocate · modify · deallocate</text>
+
+    <text x="515" y="420" text-anchor="middle" fill="#62c9d9" font-size="14" font-weight="700">3 · PERFORM THE WORK</text>
+    <path d="M515 444H777" stroke="#62c9d9" stroke-width="4" marker-end="url(#arrow-cyan)"/>
+    <text x="646" y="435" text-anchor="middle" fill="#dce7eb" font-size="16">create, change, or check resource</text>
+    <path d="M777 486H515" stroke="#62c9d9" stroke-width="4" marker-end="url(#arrow-cyan)"/>
+    <text x="646" y="478" text-anchor="middle" fill="#dce7eb" font-size="16">provider status: pending</text>
+
+    <rect x="419" y="524" width="192" height="155" rx="10" fill="#0f2c35" stroke="#79e2ef" stroke-width="2"/>
+    <text x="515" y="553" text-anchor="middle" fill="#79e2ef" font-size="14" font-weight="800">4A · FIRST 12 SECONDS</text>
+    <text x="515" y="584" text-anchor="middle" fill="#fff" font-size="19" font-weight="700">Keep control here</text>
+    <path d="M486 612c-54 0-54 45 0 45h58c54 0 54-45 0-45h-39" fill="none" stroke="#62c9d9" stroke-width="4" marker-end="url(#arrow-cyan)"/>
+    <text x="515" y="638" text-anchor="middle" fill="#d9f6f9" font-size="15">short wait → poll again</text>
+    <text x="515" y="668" text-anchor="middle" fill="#a8dbe2" font-size="13">same Provisioner invocation stays alive</text>
+
+    <text x="515" y="725" text-anchor="middle" fill="#d88b37" font-size="14" font-weight="800">4B · STILL PENDING AFTER 12 SECONDS</text>
+    <path d="M515 750H315" stroke="#d88b37" stroke-width="4" marker-end="url(#arrow-amber)"/>
+    <text x="415" y="742" text-anchor="middle" fill="#f0d0ac" font-size="16">return pending + next wait</text>
+
+    <rect x="245" y="780" width="140" height="94" rx="8" fill="#382719" stroke="#d88b37" stroke-width="2"/>
+    <text x="315" y="811" text-anchor="middle" fill="#fff" font-size="18" font-weight="700">Durable wait</text>
+    <text x="315" y="838" text-anchor="middle" fill="#e4c39d" font-size="14">Provisioner is not</text>
+    <text x="315" y="859" text-anchor="middle" fill="#e4c39d" font-size="14">running or billing</text>
+    <path d="M315 875v50h200" fill="none" stroke="#d88b37" stroke-width="4" marker-end="url(#arrow-amber)"/>
+    <text x="414" y="914" text-anchor="middle" fill="#f0d0ac" font-size="16">5 · invoke Provisioner again</text>
+
+    <path d="M515 963H110" stroke="#72ce95" stroke-width="4" marker-end="url(#arrow-green)"/>
+    <text x="313" y="953" text-anchor="middle" fill="#9be4b7" font-size="16">6 · terminal state → update product and complete</text>
+
+    <text x="450" y="1036" text-anchor="middle" fill="#91a4af" font-size="14">The 12-second boundary came from cost and timing analysis—not an arbitrary retry interval.</text>
+  </g>
+</svg>

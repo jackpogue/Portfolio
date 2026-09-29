@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 560" role="img" aria-labelledby="title desc">
+  <title id="title">Provisioner rate-control strategy</title>
+  <desc id="desc">Bursty incoming demand is shaped through a capacity gate, site ordering, adaptive polling, and terminal cutoffs into steady provider-safe work.</desc>
+  <rect width="1120" height="560" fill="#0b1117"/>
+  <g font-family="Inter,Arial,sans-serif">
+    <text x="56" y="62" fill="#f4f6f7" font-size="27" font-weight="700">Rate limiting was a control system, not a sleep timer</text>
+    <text x="56" y="96" fill="#91a4af" font-size="16">Absorb bursts, protect provider quotas, preserve per-site correctness, and stop work that cannot succeed.</text>
+    <text x="56" y="146" fill="#62c9d9" font-size="13" font-weight="700" letter-spacing="2">BURSTY DEMAND</text>
+    <g fill="#62c9d9"><rect x="56" y="232" width="24" height="54"/><rect x="89" y="182" width="24" height="104"/><rect x="122" y="214" width="24" height="72"/><rect x="155" y="154" width="24" height="132"/><rect x="188" y="238" width="24" height="48"/><rect x="221" y="198" width="24" height="88"/></g>
+    <line x1="56" y1="286" x2="266" y2="286" stroke="#6c7b84"/>
+    <path d="M288 220h72" stroke="#d88b37" stroke-width="3"/><path d="m348 210 14 10-14 10" fill="none" stroke="#d88b37" stroke-width="3"/>
+    <rect x="384" y="143" width="310" height="164" rx="8" fill="#13212b" stroke="#62c9d9"/>
+    <text x="539" y="181" text-anchor="middle" fill="#fff" font-size="20" font-weight="700">Provisioner control plane</text>
+    <text x="414" y="219" fill="#b9c8cf" font-size="15">01  Capacity budget across active workflows</text>
+    <text x="414" y="249" fill="#b9c8cf" font-size="15">02  FIFO ordering and site-aware serialization</text>
+    <text x="414" y="279" fill="#b9c8cf" font-size="15">03  Rapid checks → bounded exponential backoff</text>
+    <path d="M718 220h72" stroke="#d88b37" stroke-width="3"/><path d="m778 210 14 10-14 10" fill="none" stroke="#d88b37" stroke-width="3"/>
+    <text x="820" y="146" fill="#d88b37" font-size="13" font-weight="700" letter-spacing="2">PROVIDER-SAFE RELEASE</text>
+    <g fill="#d88b37"><rect x="820" y="236" width="24" height="50"/><rect x="856" y="236" width="24" height="50"/><rect x="892" y="236" width="24" height="50"/><rect x="928" y="236" width="24" height="50"/><rect x="964" y="236" width="24" height="50"/><rect x="1000" y="236" width="24" height="50"/></g>
+    <line x1="820" y1="286" x2="1045" y2="286" stroke="#6c7b84"/>
+    <line x1="56" y1="356" x2="1064" y2="356" stroke="#263640"/>
+    <text x="56" y="402" fill="#fff" font-size="17" font-weight="700">What the analysis changed</text>
+    <g font-size="15"><circle cx="68" cy="444" r="5" fill="#62c9d9"/><text x="86" y="450" fill="#b9c8cf">Load tests mapped the useful operating band before 429s and latency began to climb.</text><circle cx="68" cy="486" r="5" fill="#62c9d9"/><text x="86" y="492" fill="#b9c8cf">Initial provider checks stayed responsive, then backed off and capped their wait time.</text><circle cx="68" cy="528" r="5" fill="#62c9d9"/><text x="86" y="534" fill="#b9c8cf">Terminal states stopped retries and became visible failures instead of false success.</text></g>
+  </g>
+</svg>

@@ -1,0 +1,23 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Deploying large HPC clusters from a thumb drive — Jack Pogue III</title><meta name="description" content="How Jack Pogue III automated complete bare-metal HPC deployments from one portable installation source."><link rel="stylesheet" href="../../styles.css"></head><body>
+<header class="header"><nav class="nav shell"><a class="brand" href="../../">Jack Pogue III</a><div class="links"><a href="../../#work">All work</a><a href="../scene-generator/">Next case</a></div></nav></header>
+<main><section class="case-hero" style="--hero:url('../../assets/hpc-builder.png')"><div class="shell"><div class="eyebrow">Infrastructure automation · Bare metal · HPC</div><h1>Deploying large HPC clusters from a thumb drive</h1><p>I created a menu-driven installation system that transformed a thumb drive or DVD and a room of unconfigured, OS-free bare-metal servers into a functioning cluster in less than two hours.</p></div></section>
+<section class="story"><div class="shell story-grid"><aside><b>My responsibility</b><br>Designer and implementer<br><br><b>Starting point</b><br>Unconfigured bare-metal servers<br><br><b>Outcome</b><br>Large operational clusters in less than two hours</aside><article>
+<h2>From unconfigured bare metal to an operational HPC</h2><p class="lede">A pile of servers is not an HPC. Every node still needed an identity, network configuration, boot service, consistent image, shared services, security controls, monitoring and auditing, and a reliable way to join the cluster.</p>
+<p>I built a menu-driven configuration system that started directly on the cluster hardware—no installed operating system or preexisting management server required. It collected the cluster’s intent once, validated it, then built the first operating system and generated the infrastructure needed to bring the rest of the fleet online.</p>
+<div class="workflow"><div class="node">Boot first node<br><small>from USB / DVD</small></div><div class="node">Build shared image<br><small>while setup continues</small></div><div class="node">Start DHCP / TFTP / PXE</div><div class="node">Boot remaining nodes<br><small>before node one finishes</small></div><div class="node">Self-configure<br><small>while operational</small></div></div>
+<h3>One workflow, several deployment models</h3><p>The tool supported diskless nodes, local-disk installation, partially diskless systems, and a bootable-diskless fallback. It could configure a gateway or flat network, generate host identities and IP assignments, integrate DNS/NIS/NTP, build the node filesystem, configure security policy and monitoring/auditing services, and prepare a backup head node.</p>
+<pre class="code"><code>Deployment modes
+  • Diskless only
+  • Partial disk — passive or forced
+  • Bootable diskless fallback
+  • Local disk via kickstart
+
+Node onboarding
+  PXE request → capture MAC → assign hostname/IP → update DHCP → boot image</code></pre>
+<h3>Provisioning the cluster in parallel</h3><p>The first node began building the cluster image and services, but the rest of the rack did not have to wait for it to finish. As soon as the first node could serve the image, additional nodes started in diskless mode and became operational. They could then build and configure their local disks in the background while continuing to run.</p>
+<p>The builder detected new clients, assigned hostnames and addresses from their MAC information, updated DHCP, and kept enrolling machines as they appeared. The result turned a serial install process into an overlapping cluster build.</p>
+<div class="callout"><strong>Large clusters in less than two hours</strong> A portable installation source became the seed for the first node; the first node then helped provision the rest of the cluster.</div>
+<div class="takeaways"><div><b>Start with bare metal</b><br>Carry the system from blank servers to a usable HPC.</div><div><b>Overlap the work</b><br>Boot diskless first, then configure local disks in the background.</div><div><b>Grow from one seed</b><br>The first node accelerated deployment of every node after it.</div></div>
+<p class="caption">Banner image is an original, non-proprietary portfolio visualization generated for this case study.</p>
+</article></div></section>
+<nav class="case-nav" aria-label="Case study navigation"><div class="shell"><a href="../gridsim/"><span>Previous case</span><strong>← HPC modeling</strong></a><a class="all-work" href="../../#work">All work</a><a href="../scene-generator/"><span>Next case</span><strong>Real-time simulation →</strong></a></div></nav></main></body></html>

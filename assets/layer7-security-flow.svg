@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+  <title id="title">Path-scoped Layer 7 security control</title>
+  <desc id="desc">A simplified flow shows an administrative request evaluated against approved site metadata at the WAF edge. Matching administrative traffic follows a narrow bypass while all other traffic continues through normal WAF inspection.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1"><stop stop-color="#071018"/><stop offset="1" stop-color="#15323e"/></linearGradient>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0 0L9 3L0 6Z" fill="#62c9d9"/></marker>
+  </defs>
+  <rect width="1200" height="700" fill="url(#bg)"/>
+  <g opacity=".18" stroke="#62c9d9" fill="none"><circle cx="970" cy="350" r="265"/><circle cx="970" cy="350" r="190"/><circle cx="970" cy="350" r="115"/><path d="M705 350h530M970 85v530"/></g>
+  <g font-family="Inter,Arial,sans-serif">
+    <text x="58" y="70" fill="#62c9d9" font-size="16" font-weight="700" letter-spacing="3">PATH-SCOPED LAYER 7 POLICY</text>
+    <text x="58" y="112" fill="#fff" font-size="28" font-weight="700">Approved workflow. Small security boundary.</text>
+    <g transform="translate(58 235)">
+      <rect width="210" height="130" rx="13" fill="#173b49" stroke="#62c9d9" stroke-width="2"/>
+      <text x="105" y="48" text-anchor="middle" fill="#fff" font-size="20" font-weight="700">Request</text>
+      <text x="105" y="79" text-anchor="middle" fill="#b8cbd2" font-size="14">path + hostname</text>
+      <text x="105" y="101" text-anchor="middle" fill="#b8cbd2" font-size="14">metadata</text>
+    </g>
+    <g transform="translate(370 190)">
+      <rect width="250" height="220" rx="13" fill="#102a36" stroke="#d88b37" stroke-width="3"/>
+      <text x="125" y="48" text-anchor="middle" fill="#fff" font-size="20" font-weight="700">Edge decision</text>
+      <text x="125" y="87" text-anchor="middle" fill="#d6e1e5" font-size="14">recognized path?</text>
+      <text x="125" y="116" text-anchor="middle" fill="#d6e1e5" font-size="14">approved site state?</text>
+      <rect x="43" y="148" width="164" height="42" rx="21" fill="#d88b37"/>
+      <text x="125" y="175" text-anchor="middle" fill="#071018" font-size="14" font-weight="800">EVALUATE BOTH</text>
+    </g>
+    <g transform="translate(742 130)">
+      <rect width="360" height="155" rx="13" fill="#164332" stroke="#72ce95" stroke-width="3"/>
+      <text x="180" y="45" text-anchor="middle" fill="#fff" font-size="20" font-weight="700">Approved administrative path</text>
+      <text x="180" y="80" text-anchor="middle" fill="#c7ded2" font-size="14">apply the scoped bypass</text>
+      <text x="180" y="108" text-anchor="middle" fill="#72ce95" font-size="14" font-weight="700">rest of site remains protected</text>
+    </g>
+    <g transform="translate(742 410)">
+      <rect width="360" height="155" rx="13" fill="#183440" stroke="#62c9d9" stroke-width="3"/>
+      <text x="180" y="45" text-anchor="middle" fill="#fff" font-size="20" font-weight="700">All other traffic</text>
+      <text x="180" y="80" text-anchor="middle" fill="#c8d7dd" font-size="14">continue normal WAF inspection</text>
+      <text x="180" y="108" text-anchor="middle" fill="#62c9d9" font-size="14" font-weight="700">Layer 7 protections remain active</text>
+    </g>
+  </g>
+  <g fill="none" stroke="#62c9d9" stroke-width="4" marker-end="url(#arrow)"><path d="M268 300h90"/><path d="M620 260h108V210h2"/><path d="M620 340h108v148h2"/></g>
+  <g font-family="Inter,Arial,sans-serif" font-size="13" font-weight="700"><text x="670" y="244" fill="#72ce95">MATCH</text><text x="665" y="381" fill="#62c9d9">NO MATCH</text></g>
+</svg>

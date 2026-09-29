@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 650" role="img" aria-labelledby="title desc">
+  <title id="title">Object-centered image compression on a 128 by 128 pixel grid</title>
+  <desc id="desc">A conceptual 128 by 128 sensor frame divided into quadrants. A small object near the center is made from discrete, solid-color pixels; every square has one value.</desc>
+  <defs><pattern id="pixelGrid" width="4" height="4" patternUnits="userSpaceOnUse"><path d="M4 0H0V4" fill="none" stroke="#2b3a43" stroke-width=".55"/></pattern></defs>
+  <rect width="760" height="650" rx="18" fill="#0c141a"/>
+  <text x="54" y="48" fill="#fff" font-family="system-ui,sans-serif" font-size="20" font-weight="700">Conceptual 128 × 128 sensor frame</text>
+  <text x="54" y="73" fill="#9eafb8" font-family="system-ui,sans-serif" font-size="14">Each visible square is one pixel with one floating-point sample value.</text>
+  <rect x="54" y="96" width="512" height="512" fill="#101b22" stroke="#91a4af" stroke-width="2"/>
+  <rect x="54" y="96" width="512" height="512" fill="url(#pixelGrid)" shape-rendering="crispEdges"/>
+  <path d="M310 96V608M54 352H566" stroke="#62c9d9" stroke-width="2" stroke-dasharray="10 8"/>
+  <g shape-rendering="crispEdges">
+    <rect x="294" y="332" width="4" height="4" fill="#6b2430"/><rect x="298" y="332" width="4" height="4" fill="#8f3131"/>
+    <rect x="286" y="336" width="4" height="4" fill="#73302f"/><rect x="290" y="336" width="4" height="4" fill="#a74330"/><rect x="294" y="336" width="4" height="4" fill="#d66b34"/><rect x="298" y="336" width="4" height="4" fill="#e98d3a"/><rect x="302" y="336" width="4" height="4" fill="#b44c30"/><rect x="306" y="336" width="4" height="4" fill="#7f2e32"/>
+    <rect x="282" y="340" width="4" height="4" fill="#603039"/><rect x="286" y="340" width="4" height="4" fill="#a9432f"/><rect x="290" y="340" width="4" height="4" fill="#e58438"/><rect x="294" y="340" width="4" height="4" fill="#ffd668"/><rect x="298" y="340" width="4" height="4" fill="#fff1a6"/><rect x="302" y="340" width="4" height="4" fill="#ef9e43"/><rect x="306" y="340" width="4" height="4" fill="#bd5030"/><rect x="310" y="340" width="4" height="4" fill="#78313a"/>
+    <rect x="282" y="344" width="4" height="4" fill="#6c3036"/><rect x="286" y="344" width="4" height="4" fill="#c45b31"/><rect x="290" y="344" width="4" height="4" fill="#f0a445"/><rect x="294" y="344" width="4" height="4" fill="#fff2a8"/><rect x="298" y="344" width="4" height="4" fill="#fffbd6"/><rect x="302" y="344" width="4" height="4" fill="#ffd36b"/><rect x="306" y="344" width="4" height="4" fill="#db7234"/><rect x="310" y="344" width="4" height="4" fill="#913632"/>
+    <rect x="286" y="348" width="4" height="4" fill="#8b3732"/><rect x="290" y="348" width="4" height="4" fill="#db7335"/><rect x="294" y="348" width="4" height="4" fill="#ffc255"/><rect x="298" y="348" width="4" height="4" fill="#ffe991"/><rect x="302" y="348" width="4" height="4" fill="#efa044"/><rect x="306" y="348" width="4" height="4" fill="#ad4730"/>
+    <rect x="290" y="352" width="4" height="4" fill="#71313a"/><rect x="294" y="352" width="4" height="4" fill="#b84d31"/><rect x="298" y="352" width="4" height="4" fill="#d96d34"/><rect x="302" y="352" width="4" height="4" fill="#923831"/>
+  </g>
+  <g fill="#afc0c8" font-family="system-ui,sans-serif" font-size="15" font-weight="700"><text x="67" y="120">Q1</text><text x="532" y="120">Q2</text><text x="67" y="590">Q3</text><text x="532" y="590">Q4</text></g>
+  <path d="M332 342H590V250" fill="none" stroke="#d88b37" stroke-width="2"/><circle cx="332" cy="342" r="4" fill="#d88b37"/>
+  <text x="604" y="116" fill="#fff" font-family="system-ui,sans-serif" font-size="16" font-weight="700">8× pixel detail</text>
+  <rect x="604" y="132" width="128" height="128" fill="#101b22" stroke="#91a4af"/>
+  <g shape-rendering="crispEdges">
+    <rect x="636" y="148" width="16" height="16" fill="#6b2430"/><rect x="652" y="148" width="16" height="16" fill="#8f3131"/>
+    <rect x="620" y="164" width="16" height="16" fill="#73302f"/><rect x="636" y="164" width="16" height="16" fill="#d66b34"/><rect x="652" y="164" width="16" height="16" fill="#e98d3a"/><rect x="668" y="164" width="16" height="16" fill="#7f2e32"/>
+    <rect x="604" y="180" width="16" height="16" fill="#603039"/><rect x="620" y="180" width="16" height="16" fill="#e58438"/><rect x="636" y="180" width="16" height="16" fill="#ffd668"/><rect x="652" y="180" width="16" height="16" fill="#fff1a6"/><rect x="668" y="180" width="16" height="16" fill="#ef9e43"/><rect x="684" y="180" width="16" height="16" fill="#78313a"/>
+    <rect x="604" y="196" width="16" height="16" fill="#6c3036"/><rect x="620" y="196" width="16" height="16" fill="#f0a445"/><rect x="636" y="196" width="16" height="16" fill="#fff2a8"/><rect x="652" y="196" width="16" height="16" fill="#fffbd6"/><rect x="668" y="196" width="16" height="16" fill="#ffd36b"/><rect x="684" y="196" width="16" height="16" fill="#913632"/>
+    <rect x="620" y="212" width="16" height="16" fill="#8b3732"/><rect x="636" y="212" width="16" height="16" fill="#ffc255"/><rect x="652" y="212" width="16" height="16" fill="#ffe991"/><rect x="668" y="212" width="16" height="16" fill="#ad4730"/>
+    <rect x="636" y="228" width="16" height="16" fill="#b84d31"/><rect x="652" y="228" width="16" height="16" fill="#d96d34"/>
+  </g>
+  <path d="M604 132V260M620 132V260M636 132V260M652 132V260M668 132V260M684 132V260M700 132V260M716 132V260M732 132V260M604 148H732M604 164H732M604 180H732M604 196H732M604 212H732M604 228H732M604 244H732" stroke="#293a43" stroke-width="1"/>
+  <text x="604" y="286" fill="#aebdc5" font-family="system-ui,sans-serif" font-size="13">one solid value per pixel</text>
+  <text x="604" y="429" fill="#62c9d9" font-family="system-ui,sans-serif" font-size="15" font-weight="700">Sparse traversal</text><text x="604" y="452" fill="#aebdc5" font-family="system-ui,sans-serif" font-size="13">empty runs encoded</text><text x="604" y="472" fill="#aebdc5" font-family="system-ui,sans-serif" font-size="13">compactly outward</text>
+</svg>
